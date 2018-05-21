@@ -250,7 +250,7 @@ public class Login extends javax.swing.JFrame {
         String errorMessage ="";
         String loginidin = null;
         String passwrdin = null;
-        String domain = "drag";
+        String domain = "admin";
         
         if (loginID4.getText().isEmpty()){
            errorMessage = errorMessage.concat("Login ID is missing.\n");
