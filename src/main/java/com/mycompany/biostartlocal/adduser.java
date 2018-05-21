@@ -6,6 +6,8 @@
 package com.mycompany.biostartlocal;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import okhttp3.Call;
 import okhttp3.FormBody;
 import okhttp3.MediaType;
@@ -17,15 +19,6 @@ import okhttp3.Response;
 public class adduser extends Login{
   
   public void register() throws IOException {
-    String log = "{\n" +
-"  \"mobile_app_version\": \"\",\n" +
-"  \"mobile_device_type\": \"\",\n" +
-"  \"mobile_os_version\": \"\",\n" +
-"  \"name\": \"admin\",\n" +
-"  \"notification_token\": \"\",\n" +
-"  \"password\": \"admin747\",\n" +
-"  \"user_id\": \"1\"\n" +
-"}";
       String json = "{\n" +
 "  \"access_groups\": [\n" +
 "    {\n" +
@@ -65,7 +58,9 @@ public class adduser extends Login{
 "  \"user_id\": \"48\"\n" +
 "}";
  
-    RequestBody body = RequestBody.create(
+    
+    
+      RequestBody body = RequestBody.create(
       MediaType.parse("application/json; charset=utf-8"), json);
  
     Request request = new Request.Builder()
@@ -82,10 +77,19 @@ public class adduser extends Login{
      System.out.println(result);
     
 }
-  public static void main(String args[]) throws IOException{
+  public static void main(String args[]) {
+      log lg = new log();
+      try {
+          lg.log();
+      } catch (IOException ex) {
+          Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
+      }
       adduser add =new adduser();
-      thisjkjj
-      add.register();
+      try {
+          add.register();
+      } catch (IOException ex) {
+          Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
+      }
 }
      
 }
