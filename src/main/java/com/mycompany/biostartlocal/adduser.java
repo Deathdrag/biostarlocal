@@ -16,8 +16,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class adduser extends Login{
-  
+public class adduser { 
   public void register() throws IOException {
       String json = "{\n" +
 "  \"access_groups\": [\n" +
@@ -68,8 +67,6 @@ public class adduser extends Login{
       .post(body)
       .build();
   
- 
-    
      OkHttpClient client = new OkHttpClient();
     Call call = client.newCall(request);
     Response response = call.execute();
@@ -78,15 +75,10 @@ public class adduser extends Login{
     
 }
   public static void main(String args[]) {
-      log lg = new log();
+      
+      adduser user=new adduser();
       try {
-          lg.log();
-      } catch (IOException ex) {
-          Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
-      }
-      adduser add =new adduser();
-      try {
-          add.register();
+          user.register();
       } catch (IOException ex) {
           Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
       }

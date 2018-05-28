@@ -21,7 +21,6 @@ public class loginclass {
    
  
   public String logindata(String userid, String pswrd, String domain) 
-          
   throws IOException {
     RequestBody formBody = new FormBody.Builder()
       .add("user_id", userid)
