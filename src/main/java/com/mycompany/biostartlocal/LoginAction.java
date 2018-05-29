@@ -50,6 +50,7 @@ public class LoginAction {
                 }
                 String cookieValue = null;
                 Map<String, List<String>> headers = conn.getHeaderFields();
+              
 //                headers.forEach((key,value)-> {
 //                if (key.startsWith("Set-Cookie")) {
 //                value.forEach(v->System.out.println(v));
@@ -67,7 +68,7 @@ public class LoginAction {
                String[] strCookieArr = cookieValue.split("bs-cloud-session-id=",0);
                String[] strCookieArr2 = strCookieArr[1].split(";", 0);
                String  sessionID =strCookieArr2[0];
-               System.out.println("Hey paul");
+//               System.out.println("Hey paul");
                System.out.println(sessionID);
                
 //                List<String> cookies = conn.getHeaderFields().get("Set-Cookie");
