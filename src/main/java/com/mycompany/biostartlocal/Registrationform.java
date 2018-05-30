@@ -265,7 +265,7 @@ public class Registrationform extends javax.swing.JFrame {
     }//GEN-LAST:event_closeFrmMouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        compliteprofile lg = new compliteprofile();
+        Login lg = new Login();
         lg.setVisible(true);
         lg.pack();
         lg.setLocationRelativeTo(null);

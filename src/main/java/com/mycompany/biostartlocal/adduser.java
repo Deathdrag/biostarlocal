@@ -6,41 +6,21 @@
 package com.mycompany.biostartlocal;
 
 import com.google.gson.Gson;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import static java.util.Collections.list;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHost;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.cookie.BasicClientCookie;
-import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 //import okhttp3.Call;
 //import okhttp3.FormBody;
@@ -52,11 +32,16 @@ import org.apache.http.util.EntityUtils;
 
 public class adduser extends LoginAction {
     
-  public void adduser() throws IOException, URISyntaxException {
+    
+  public String adduser(String mail, String namee, String loginid,String expdate, String pswrd, 
+          String stdate,String userid, String phone, String operator) throws IOException, URISyntaxException {
       LoginAction lgn = new LoginAction();
       String snID = lgn.LoginAction();
       System.out.println(snID);
-      String json = "{\n" +
+//      RequestBody formBody = new FormBody.Builder()
+//              .add(namee, namee)
+//              .build();
+     String json = "{\n" +
 "  \"access_groups\": [\n" +
 "    {\n" +
 "      \"id\": 1,\n" +
@@ -64,14 +49,14 @@ public class adduser extends LoginAction {
 "      \"name\": \"admin\"\n" +
 "    }\n" +
 "  ],\n" +
-"  \"email\": \"dragon@gmail.com\",\n" +
-"  \"expiry_datetime\": \"2019-02-10T02:24:39.298Z\",\n" +
-"  \"login_id\": \"dragon\",\n" +
-"  \"name\": \"paul Kalenda dragon\",\n" +
-"  \"password\": \"dragon747\",\n" +
+"  \"email\": \""+ mail +"\",\n" +
+"  \"expiry_datetime\": \""+ expdate +"\",\n" +
+"  \"login_id\": \""+ loginid +"\",\n" +
+"  \"name\": \""+ namee +"\",\n" +
+"  \"password\": \""+ pswrd +"\",\n" +
 "  \"permission\": {\n" +
 "    \"id\": 1,\n" +
-"    \"name\": \"Administrator\",\n" +
+"    \"name\": \""+ operator +"\",\n" +
 "    \"permissions\": [\n" +
 "      {\n" +
 "        \"allowed_group_id_list\": [\n" +
@@ -83,18 +68,57 @@ public class adduser extends LoginAction {
 "      }\n" +
 "    ]\n" +
 "  },\n" +
-"  \"phone_number\": \"0715668934\",\n" +
+"  \"phone_number\": \""+ phone +"\",\n" +
 "  \"pin\": \"\",\n" +
 "  \"security_level\": \"\",\n" +
-"  \"start_datetime\": \"2018-02-10T12:08:05.295Z\",\n" +
+"  \"start_datetime\": \""+ stdate +"\",\n" +
 "  \"status\": \"AC\",\n" +
 "  \"user_group\": {\n" +
 "    \"id\": 1,\n" +
 "    \"name\": \"All Users\"\n" +
 "  },\n" +
-"  \"user_id\": \"879\"\n" +
+"  \"user_id\": \""+ userid +"\"\n" +
 "}";
- 
+
+//              "{"
+//              + "'access_groups':["
+//              + "{"
+//              + "'id':1,"
+//              + "'included_by_user_group':'Yes',"
+//              + "'name':'admin',"
+//              + "}"
+//              + "],"
+//              + "'email':'"+ mail +"',"
+//              + "'expiry_datetime':'"+ expdate +"',"
+//              + "'login_id':'"+ loginid +"',"
+//              + "'name':'"+ namee +"',"
+//              + "'password':'"+ pswrd +"',"
+//              + "'permission':{"
+//              + "'id':1,"
+//              + "'name':'"+ operator +"',"
+//              + "'permissions':["
+//              + "{"
+//              + "'allowed_group_id_list':["
+//              + "'1'"
+//              + "],"
+//              + "'module':'CARD',"
+//              + "'read':true,"
+//              + "'write':true"
+//              + "}"
+//              + "]"
+//              + "},"
+//              + "'phone_number':'"+ phone +"',"
+//              + "'pin':'',"
+//              + "'security_level':'',"
+//              + "'start_datetime':'"+ stdate +"',"
+//              + "'status': 'AC',"
+//              + "'user_group':{"
+//              + "'id':1,"
+//              + "'name':'All Users'"
+//              + "},"
+//              + "'user_id':'"+ userid +"'"
+//              + "}";
+// 
 //        URL url2 = new URL("http://127.0.0.1:8795/v2/users");
 //        HttpURLConnection connection = (HttpURLConnection)url2.openConnection();
 //        connection.setAllowUserInteraction(false);
@@ -141,59 +165,7 @@ public class adduser extends LoginAction {
 ////     System.out.println(result);
     LoginAction loggedinUser = new LoginAction();
                 
-		Gson gson = new Gson();
-//		HttpClient client = new HttpClient() {
-//          @Override
-//          public HttpParams getParams() {
-//              throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//          }
-//
-//          @Override
-//          public ClientConnectionManager getConnectionManager() {
-//              throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//          }
-//
-//          @Override
-//          public HttpResponse execute(HttpUriRequest hur) throws IOException, ClientProtocolException {
-//              throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//          }
-//
-//          @Override
-//          public HttpResponse execute(HttpUriRequest hur, HttpContext hc) throws IOException, ClientProtocolException {
-//              throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//          }
-//
-//          @Override
-//          public HttpResponse execute(HttpHost hh, HttpRequest hr) throws IOException, ClientProtocolException {
-//              throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//          }
-//
-//          @Override
-//          public HttpResponse execute(HttpHost hh, HttpRequest hr, HttpContext hc) throws IOException, ClientProtocolException {
-//              throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//          }
-//
-//          @Override
-//          public <T> T execute(HttpUriRequest hur, ResponseHandler<? extends T> rh) throws IOException, ClientProtocolException {
-//              throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//          }
-//
-//          @Override
-//          public <T> T execute(HttpUriRequest hur, ResponseHandler<? extends T> rh, HttpContext hc) throws IOException, ClientProtocolException {
-//              throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//          }
-//
-//          @Override
-//          public <T> T execute(HttpHost hh, HttpRequest hr, ResponseHandler<? extends T> rh) throws IOException, ClientProtocolException {
-//              throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//          }
-//
-//          @Override
-//          public <T> T execute(HttpHost hh, HttpRequest hr, ResponseHandler<? extends T> rh, HttpContext hc) throws IOException, ClientProtocolException {
-//              throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//          }
-//      };
-                
+		Gson gson = new Gson();              
                 CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 		URI uri = new URIBuilder("http://127.0.0.1:8795/v2/users")
 //                               .addParameter("body", json)
@@ -230,17 +202,15 @@ public class adduser extends LoginAction {
 			}
 			EntityUtils.consume(entity);
 		}
+                
+        return null;
 
 		
 	}
 
   public static void main(String args[]) throws IOException {
       adduser add = new adduser();
-      try {
-          add.adduser();
-      } catch (URISyntaxException ex) {
-          Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
-      }
+      
 }
      
 }
