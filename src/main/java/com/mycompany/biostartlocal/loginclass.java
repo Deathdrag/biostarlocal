@@ -19,7 +19,26 @@ import okhttp3.Response;
  */
 public class loginclass {
    
- 
+//    public static void jsonToMap(String t) throws JSONException{
+//
+//    HashMap<String, String> map = new HashMap<>();
+//    JSONObject jObject = new JSONObject(t);
+//    Iterator<?> keys = jObject.keys();
+//
+//    while (keys.hasNext()) {
+//        while(keys.hasNext()){
+//            while(keys.hasNext()){
+//        String key = (String) keys.next();
+//        String value = jObject.getString(key);
+//        map.put(key, value);
+//        }
+//        }
+//    }
+//
+//    System.out.println("json : " + jObject);
+//    System.out.println("map : " + map);
+//}
+ jsonTomap j=new jsonTomap();
   public String logindata(String userid, String pswrd, String domain) 
   throws IOException {
     RequestBody formBody = new FormBody.Builder()
@@ -41,10 +60,13 @@ public class loginclass {
     Call call = client.newCall(request);
     Response response = call.execute();
     String result=response.body().string();
-     System.out.println(result);
+    jsonTomap.jsonToMap(result);
+//    JOptionPane.showMessageDialog(null,result);
+//     System.out.println(result);
      return result;
     //assertThat(response.code(),equalTo(200));
 }  
+  
 
    
     public static void main(String args[]) throws IOException{

@@ -9,9 +9,11 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import javax.swing.JOptionPane;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.CookieStore;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -19,6 +21,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.util.EntityUtils;
@@ -80,45 +83,7 @@ public class adduser extends LoginAction {
 "  \"user_id\": \""+ userid +"\"\n" +
 "}";
 
-//              "{"
-//              + "'access_groups':["
-//              + "{"
-//              + "'id':1,"
-//              + "'included_by_user_group':'Yes',"
-//              + "'name':'admin',"
-//              + "}"
-//              + "],"
-//              + "'email':'"+ mail +"',"
-//              + "'expiry_datetime':'"+ expdate +"',"
-//              + "'login_id':'"+ loginid +"',"
-//              + "'name':'"+ namee +"',"
-//              + "'password':'"+ pswrd +"',"
-//              + "'permission':{"
-//              + "'id':1,"
-//              + "'name':'"+ operator +"',"
-//              + "'permissions':["
-//              + "{"
-//              + "'allowed_group_id_list':["
-//              + "'1'"
-//              + "],"
-//              + "'module':'CARD',"
-//              + "'read':true,"
-//              + "'write':true"
-//              + "}"
-//              + "]"
-//              + "},"
-//              + "'phone_number':'"+ phone +"',"
-//              + "'pin':'',"
-//              + "'security_level':'',"
-//              + "'start_datetime':'"+ stdate +"',"
-//              + "'status': 'AC',"
-//              + "'user_group':{"
-//              + "'id':1,"
-//              + "'name':'All Users'"
-//              + "},"
-//              + "'user_id':'"+ userid +"'"
-//              + "}";
-// 
+
 //        URL url2 = new URL("http://127.0.0.1:8795/v2/users");
 //        HttpURLConnection connection = (HttpURLConnection)url2.openConnection();
 //        connection.setAllowUserInteraction(false);
@@ -165,8 +130,9 @@ public class adduser extends LoginAction {
 ////     System.out.println(result);
     LoginAction loggedinUser = new LoginAction();
                 
-		Gson gson = new Gson();              
-                CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+		Gson gson = new Gson();
+                 HttpClient client = new DefaultHttpClient();
+//                CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 		URI uri = new URIBuilder("http://127.0.0.1:8795/v2/users")
 //                               .addParameter("body", json)
 //                                .addParameter("Content-type", "application/json")
@@ -185,9 +151,8 @@ public class adduser extends LoginAction {
 		HttpClientContext context = HttpClientContext.create();
                 context.setCookieStore(cookieStore);
                 
-//		CloseableHttpResponse response = ((CloseableHttpClient) httpClient).execute(postNewUser, context);
-                                
-		try (CloseableHttpResponse response = httpClient.execute(postNewUser,context)) {
+		try(CloseableHttpResponse response = ((CloseableHttpClient) client).execute(postNewUser, context)) 
+                {
 			System.out.println(response.getStatusLine());
 			HttpEntity entity = response.getEntity();
 			String responseBody = EntityUtils.toString(entity);
@@ -196,10 +161,15 @@ public class adduser extends LoginAction {
 						UserSearchResult.class);
 
 				String list = searchResult.toString();
+                                JOptionPane.showMessageDialog(null,"User created :"+ userid +"/nmessage\":\"Created successfully");
+//                                JOptionPane.showMessageDialog(null,response.getStatusLine());
+//                                jsonTomap read=new jsonTomap();
+//                                jsonTomap.jsonToMap(read);
                                 
 			} else {
 				System.err.println(responseBody);
 			}
+                        
 			EntityUtils.consume(entity);
 		}
                 
