@@ -5,10 +5,18 @@
  */
 package com.mycompany.biostartlocal;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -16,9 +24,7 @@ import java.util.logging.Logger;
  */
 public class addFingerPrint extends javax.swing.JFrame {
 
-    /**
-     * Creates new form addFingerPrint
-     */
+    public String Resulsts = null;
     public addFingerPrint() {
         initComponents();
     }
@@ -40,10 +46,10 @@ public class addFingerPrint extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         finger1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        temp1 = new javax.swing.JLabel();
+        temp0 = new javax.swing.JLabel();
+        enroll = new javax.swing.JButton();
+        close = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,9 +88,9 @@ public class addFingerPrint extends javax.swing.JFrame {
 
         finger1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
-        jLabel2.setBackground(new java.awt.Color(204, 204, 204));
+        temp1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel3.setBackground(new java.awt.Color(153, 153, 153));
+        temp0.setBackground(new java.awt.Color(153, 153, 153));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -92,9 +98,9 @@ public class addFingerPrint extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(temp1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(temp0, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -102,23 +108,33 @@ public class addFingerPrint extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(temp0, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(temp1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        jButton1.setBackground(new java.awt.Color(0, 51, 255));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jButton1.setText("ENROLL");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        enroll.setBackground(new java.awt.Color(0, 51, 255));
+        enroll.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        enroll.setText("ENROLL");
+        enroll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                enrollActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(204, 204, 204));
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jButton3.setText("CANCEL");
+        close.setBackground(new java.awt.Color(204, 204, 204));
+        close.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        close.setText("CANCEL");
+        close.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeMouseClicked(evt);
+            }
+        });
+        close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,10 +167,10 @@ public class addFingerPrint extends javax.swing.JFrame {
                                 .addGap(0, 60, Short.MAX_VALUE)))))
                 .addGap(32, 32, 32))
             .addGroup(layout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addComponent(jButton1)
-                .addGap(63, 63, 63)
-                .addComponent(jButton3)
+                .addGap(148, 148, 148)
+                .addComponent(enroll)
+                .addGap(26, 26, 26)
+                .addComponent(close)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -178,8 +194,8 @@ public class addFingerPrint extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(enroll, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -195,22 +211,94 @@ public class addFingerPrint extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void scanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanActionPerformed
-//       scanfinger enrole= new scanfinger();
-//      
-//       
-//        try {
-//            System.out.println(enrole.scan(deviceid.getText()));
-//            String device = deviceid.getText();
-//            
-//        } catch (IOException | URISyntaxException ex) {
-//            Logger.getLogger(addFingerPrint.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         
+        if(!"1st".equals(finger1.getText())) 
+        {
+            JOptionPane.showMessageDialog(null,"Please select fingerprint");
+        } else
+        {
+        final int NUM_FIELDS =1;
+        int numCorrectFields =0;
+        String errorMessage ="";
+        String device = null;
+        
+        if (deviceid.getText().isEmpty()){
+           errorMessage = errorMessage.concat("Device ID is missing.\n");
+           deviceid.setText("");
+           deviceid.setBorder(new LineBorder(Color.red));
+        }else{
+        numCorrectFields++;
+        device = deviceid.getText();
+        
+        }
+        if (numCorrectFields < NUM_FIELDS){
+           JOptionPane.showMessageDialog(null,errorMessage,"Incoplete/Invalid Data Entered!",
+                   JOptionPane.ERROR_MESSAGE );
+        }else
+        {
+            ScanFingerPrint scan = new ScanFingerPrint();
+        try {
+            Resulsts = scan.scan(device);
+        } catch (IOException | URISyntaxException ex) {
+            Logger.getLogger(addFingerPrint.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        }
+        }
     }//GEN-LAST:event_scanActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void enrollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollActionPerformed
+  
+        if(!"1st".equals(finger1.getText())) 
+        {
+            JOptionPane.showMessageDialog(null,"Please click add button and scann finger");
+        }else if(Resulsts==null)
+        {
+            JOptionPane.showMessageDialog(null,"Please scan your fingerprint first");
+        }
+        else
+        {
+            
+        HashMap<String, String> map = new HashMap<>();
+        JSONObject jObject = new JSONObject(Resulsts);
+        Iterator<?> keys = jObject.keys();
+
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            String value = jObject.getString(key);
+            map.put(key, value);
+
+        }
+
+            System.out.println("json : " + jObject);
+            System.out.println("map : " + map);
+            String template0 = map.get("template0");
+            String template1 = map.get("template0");
+
+            JFrame f=new JFrame();  
+            String user_id=null;
+            JOptionPane.showInputDialog(f,"Enter your National ID number");
+            while("".equals(user_id)|| user_id==null)
+            {
+                user_id=JOptionPane.showInputDialog(f,"Enter your National ID number");
+            }
+            EnrollFingerPrint addtemp = new EnrollFingerPrint();
+        try {
+            addtemp.enrollfingerprint(user_id, template0, template1);
+        } catch (IOException | URISyntaxException ex) {
+            Logger.getLogger(addFingerPrint.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+            
+    }//GEN-LAST:event_enrollActionPerformed
+
+    private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionPerformed
+     
+    }//GEN-LAST:event_closeActionPerformed
+
+    private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
+        int DISPOSE_ON_CLOSE1 = addFingerPrint.DISPOSE_ON_CLOSE;
+    }//GEN-LAST:event_closeMouseClicked
 
     /**
      * @param args the command line arguments
@@ -248,17 +336,17 @@ public class addFingerPrint extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton close;
     private javax.swing.JTextField deviceid;
+    private javax.swing.JButton enroll;
     private javax.swing.JLabel finger1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel quality;
     private javax.swing.JTextField qualityvalue;
     private javax.swing.JButton scan;
+    private javax.swing.JLabel temp0;
+    private javax.swing.JLabel temp1;
     // End of variables declaration//GEN-END:variables
 }

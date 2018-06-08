@@ -60,9 +60,8 @@ public class loginclass {
     Call call = client.newCall(request);
     Response response = call.execute();
     String result=response.body().string();
-    jsonTomap.jsonToMap(result);
 //    JOptionPane.showMessageDialog(null,result);
-//     System.out.println(result);
+     System.out.println(result);
      return result;
     //assertThat(response.code(),equalTo(200));
 }  

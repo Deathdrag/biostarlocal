@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -94,7 +95,7 @@ public class compliteprofile extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         USERNAME.setBackground(new java.awt.Color(0, 0, 0));
-        USERNAME.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        USERNAME.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
         lbleinfo.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lbleinfo.setText(" Please fill in this form to complite Your Registration");
@@ -219,6 +220,11 @@ public class compliteprofile extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jButton1.setText("+ FINGERPRINT");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -601,7 +607,7 @@ public class compliteprofile extends javax.swing.JFrame {
         String sdt = "T12:08:05.295Z";
             try {
                 StartDate = sdf2.format(sdf.parse(tmzdt))+ sdt;
-                System.out.println(StartDate);
+//                System.out.println(StartDate);
             } catch (ParseException ex) {
                 Logger.getLogger(compliteprofile.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -619,7 +625,7 @@ public class compliteprofile extends javax.swing.JFrame {
         String sdt = "T12:08:05.295Z";
             try {
                 EndDate = sf2.format(sf.parse(tmdt))+ sdt;
-                System.out.println(EndDate);
+//                System.out.println(EndDate);
             } catch (ParseException ex) {
                 Logger.getLogger(compliteprofile.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -656,6 +662,14 @@ public class compliteprofile extends javax.swing.JFrame {
     private void operatorlevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operatorlevelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_operatorlevelActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+      addFingerPrint add = new addFingerPrint();
+      add.setVisible(true);
+      add.pack();
+      add.setLocationRelativeTo(null);
+      add.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments

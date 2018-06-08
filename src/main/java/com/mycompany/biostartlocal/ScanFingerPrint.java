@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 import javax.swing.JOptionPane;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
@@ -26,58 +26,51 @@ import org.apache.http.util.EntityUtils;
  *
  * @author gk
  */
-public class EnrollFingerPrint { 
-
-    public String enrollfingerprint (String user_id,String template0,String template1) throws IOException, URISyntaxException
+public class ScanFingerPrint {
+    
+    
+    public String scan(String devicId) throws IOException, URISyntaxException
     {
-       
         LoginAction lgin = new LoginAction();
         String snID = lgin.LoginAction();
-        ScanFingerPrint temp = new ScanFingerPrint();
-        EnrollFingerPrint addtemp = new EnrollFingerPrint();
-
         String content= null;
         Gson gson = new Gson();
         String json = "{\n" +
-"  \"fingerprint_template_list\": [\n" +
-"    {\n" +
-"      \"is_prepare_for_duress\": false,\n" +
-"      \"template0\": \""+template0+"\",\n" +
-"      \"template1\": \""+template1+"\"\n" +
-"    }\n" +
-"  ]\n" +
+"  \"enroll_quality\": 80,\n" +
+"  \"retrieve_raw_image\": true\n" +
 "}";
         
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-        URI uri = new URIBuilder("http://127.0.0.1:8795/v2/users/"+user_id+"/fingerprint_templates")
-//                .addParameter("id",user_id)
+        URI uri = new URIBuilder("http://127.0.0.1:8795/v2/devices/"+devicId+"/scan_fingerprint")
+                
+//                .addParameter("id", devicId)
 //                .addParameter("Content-type", "application/json")
                 .build();
-        HttpPut putNewfinger = new HttpPut(uri);
-        putNewfinger.setEntity(new StringEntity(json, "UTF8"));
-        putNewfinger.setHeader("Content-type", "application/json");
+        HttpPost postNewUser = new HttpPost(uri);
+        postNewUser.setEntity(new StringEntity(json, "UTF8"));
+        postNewUser.setHeader("Content-type", "application/json");
         
         CookieStore cookieStore = new BasicCookieStore();
 	BasicClientCookie cookie = new BasicClientCookie("bs-cloud-session-id",snID);
 	cookie.setDomain("127.0.0.1");
 	cookie.setPath("/");
 	cookieStore.addCookie(cookie);
-
-	HttpClientContext context = HttpClientContext.create();
-        context.setCookieStore(cookieStore);
         
-       try (CloseableHttpResponse httpResponse = httpClient.execute(putNewfinger,context)) {
+        HttpClientContext context = HttpClientContext.create();
+        context.setCookieStore(cookieStore);
+
+	try (CloseableHttpResponse httpResponse = httpClient.execute(postNewUser,context)) {
         content = EntityUtils.toString(httpResponse.getEntity());
  
         int statusCode = httpResponse.getStatusLine().getStatusCode();
         System.out.println("statusCode = " + statusCode);
         System.out.println("content = " + content);
-        
         if(statusCode== 200)
         {
-        jsonTomap results = new jsonTomap();
-        results.jsonToMap(content);
-//        JOptionPane.showMessageDialog(null,"Scan was completed successfully");
+//        jsonTomap results = new jsonTomap();
+////                JOptionPane.showMessageDialog(null,content.);
+//        results.jsonToMap(content);
+        JOptionPane.showMessageDialog(null,"Scan was completed successfully");
         }
         else if(statusCode != 200)
         {
@@ -85,10 +78,12 @@ public class EnrollFingerPrint {
             msg.jsonToMap(content);
         }
         
-    } catch (IOException e) {
+        } catch (IOException e) {
             //handle exception
-    }
+        }
+        
         return content;
-    }
-
+        
+        }
+         
 }

@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
@@ -39,6 +40,7 @@ public class adduser extends LoginAction {
   public String adduser(String mail, String namee, String loginid,String expdate, String pswrd, 
           String stdate,String userid, String phone, String operator) throws IOException, URISyntaxException {
       LoginAction lgn = new LoginAction();
+      String content= null;
       String snID = lgn.LoginAction();
       System.out.println(snID);
 //      RequestBody formBody = new FormBody.Builder()
@@ -131,8 +133,8 @@ public class adduser extends LoginAction {
     LoginAction loggedinUser = new LoginAction();
                 
 		Gson gson = new Gson();
-                 HttpClient client = new DefaultHttpClient();
-//                CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+//                 HttpClient client = new DefaultHttpClient();
+               CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 		URI uri = new URIBuilder("http://127.0.0.1:8795/v2/users")
 //                               .addParameter("body", json)
 //                                .addParameter("Content-type", "application/json")
@@ -151,36 +153,29 @@ public class adduser extends LoginAction {
 		HttpClientContext context = HttpClientContext.create();
                 context.setCookieStore(cookieStore);
                 
-		try(CloseableHttpResponse response = ((CloseableHttpClient) client).execute(postNewUser, context)) 
-                {
-			System.out.println(response.getStatusLine());
-			HttpEntity entity = response.getEntity();
-			String responseBody = EntityUtils.toString(entity);
-			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-				UserSearchResult searchResult = gson.fromJson(responseBody,
-						UserSearchResult.class);
-
-				String list = searchResult.toString();
-                                JOptionPane.showMessageDialog(null,"User created :"+ userid +"/nmessage\":\"Created successfully");
-//                                JOptionPane.showMessageDialog(null,response.getStatusLine());
-//                                jsonTomap read=new jsonTomap();
-//                                jsonTomap.jsonToMap(read);
-                                
-			} else {
-				System.err.println(responseBody);
-			}
-                        
-			EntityUtils.consume(entity);
-		}
+		try (CloseableHttpResponse httpResponse = httpClient.execute(postNewUser,context)) {
+                content = EntityUtils.toString(httpResponse.getEntity());
+ 
+                int statusCode = httpResponse.getStatusLine().getStatusCode();
+                System.out.println("statusCode = " + statusCode);
+                System.out.println("content = " + content);
+                jsonTomap results = new jsonTomap();
+//                JOptionPane.showMessageDialog(null,content.);
+                results.jsonToMap(content);
                 
-        return null;
-
-		
+//                String[] strCookieArr = content.split("message",0);
+//                for (String strCookieArr1 : strCookieArr) {
+//                       System.out.println(strCookieArr1);
+//                    }
+//                JFrame f=new JFrame();
+//                JOptionPane.showMessageDialog(f,"Successfully Updated.","Alert",JOptionPane.WARNING_MESSAGE);
+//        
+                } catch (IOException e) {
+                    //handle exception
+                }
+                
+            return content;
+	
 	}
-
-  public static void main(String args[]) throws IOException {
-      adduser add = new adduser();
-      
-}
      
 }

@@ -278,6 +278,7 @@ public class Login extends javax.swing.JFrame {
           loginclass ln= new loginclass();
             try {
                 ln.logindata(loginidin, passwrdin, domain);
+                dispose();
             } catch (IOException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
