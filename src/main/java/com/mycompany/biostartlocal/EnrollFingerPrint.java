@@ -28,7 +28,7 @@ import org.apache.http.util.EntityUtils;
  */
 public class EnrollFingerPrint { 
 
-    public String enrollfingerprint (String user_id,String template0,String template1) throws IOException, URISyntaxException
+    public String enrollfingerprint (String user_id,String details) throws IOException, URISyntaxException
     {
        
         LoginAction lgin = new LoginAction();
@@ -38,15 +38,7 @@ public class EnrollFingerPrint {
 
         String content= null;
         Gson gson = new Gson();
-        String json = "{\n" +
-"  \"fingerprint_template_list\": [\n" +
-"    {\n" +
-"      \"is_prepare_for_duress\": false,\n" +
-"      \"template0\": \""+template0+"\",\n" +
-"      \"template1\": \""+template1+"\"\n" +
-"    }\n" +
-"  ]\n" +
-"}";
+        String json = ""+details+"";
         
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         URI uri = new URIBuilder("http://127.0.0.1:8795/v2/users/"+user_id+"/fingerprint_templates")

@@ -21,6 +21,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 /**
  *
@@ -34,6 +37,7 @@ public class ScanFingerPrint {
         LoginAction lgin = new LoginAction();
         String snID = lgin.LoginAction();
         String content= null;
+        String message= null;
         Gson gson = new Gson();
         String json = "{\n" +
 "  \"enroll_quality\": 80,\n" +
@@ -63,27 +67,57 @@ public class ScanFingerPrint {
         content = EntityUtils.toString(httpResponse.getEntity());
  
         int statusCode = httpResponse.getStatusLine().getStatusCode();
-        System.out.println("statusCode = " + statusCode);
-        System.out.println("content = " + content);
+//        System.out.println("statusCode = " + statusCode);
+//        System.out.println("content = " + content);
+        
+        
         if(statusCode== 200)
         {
-//        jsonTomap results = new jsonTomap();
-////                JOptionPane.showMessageDialog(null,content.);
-//        results.jsonToMap(content);
+////            
         JOptionPane.showMessageDialog(null,"Scan was completed successfully");
+        
+        message= content;
+        System.out.println("my templates= " + message);
+        
         }
-        else if(statusCode != 200)
+        else if(statusCode == 400)
         {
-            jsonTomap msg = new jsonTomap();
-            msg.jsonToMap(content);
+            jsonTomap msgr = new jsonTomap();
+           message = msgr.jsonToMap(content);
+        }
+        else if(statusCode != 200 && statusCode != 400)
+        {
+            jsonTomap msgr = new jsonTomap();
+            message= msgr.jsonToMap(content);
         }
         
         } catch (IOException e) {
             //handle exception
         }
         
-        return content;
+        return message;
         
         }
+    
+      public String jsonToMap(String t) throws JSONException, IOException, URISyntaxException{
+    
+       JSONObject jsonObject = new JSONObject(t);
+       
+       String msg = (String) jsonObject.get("template0");
+       
+
+        return msg;
+    
+}
+       public String template(String t) throws JSONException, IOException, URISyntaxException{
+    
+       JSONObject jsonObject = new JSONObject(t);
+       
+       String msg = (String) jsonObject.get("template_image0");
+       
+
+        return msg;
+    
+}
          
 }

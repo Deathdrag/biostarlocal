@@ -7,13 +7,9 @@ package com.mycompany.biostartlocal;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import javax.swing.JOptionPane;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,8 +19,8 @@ import org.json.JSONObject;
  */
 public class jsonTomap {
     
-    public void jsonToMap(String t) throws JSONException, IOException, URISyntaxException{
-    
+    public String jsonToMap(String t) throws JSONException, IOException, URISyntaxException{
+    String msg = null;
    
     HashMap<String, String> map = new HashMap<>();
     JSONObject jObject = new JSONObject(t);
@@ -39,7 +35,9 @@ public class jsonTomap {
 
 //    System.out.println("json : " + jObject);
 //    System.out.println("map : " + map);
+     msg = map.get("message");
     JOptionPane.showMessageDialog(null,map.get("message"));
+        return msg;
     
 }
 

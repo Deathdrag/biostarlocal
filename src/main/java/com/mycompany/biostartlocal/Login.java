@@ -7,6 +7,8 @@ package com.mycompany.biostartlocal;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -277,9 +279,9 @@ public class Login extends javax.swing.JFrame {
         {
           loginclass ln= new loginclass();
             try {
-                ln.logindata(loginidin, passwrdin, domain);
+                ln.LoginAction(loginidin, passwrdin);
                 dispose();
-            } catch (IOException ex) {
+            } catch (IOException | URISyntaxException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
           
