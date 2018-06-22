@@ -9,12 +9,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpStatus;
 import org.apache.http.client.CookieStore;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -22,7 +17,6 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.util.EntityUtils;
@@ -38,7 +32,7 @@ public class adduser extends LoginAction {
     
     
   public String adduser(String mail, String namee, String loginid,String expdate, String pswrd, 
-          String stdate,String userid, String phone, String operator) throws IOException, URISyntaxException {
+          String stdate,String userid, String phone, String operator, int no) throws IOException, URISyntaxException {
       LoginAction lgn = new LoginAction();
       String content= null;
       String snID = lgn.LoginAction();
@@ -60,7 +54,7 @@ public class adduser extends LoginAction {
 "  \"name\": \""+ namee +"\",\n" +
 "  \"password\": \""+ pswrd +"\",\n" +
 "  \"permission\": {\n" +
-"    \"id\": 1,\n" +
+"    \"id\": "+no+",\n" +
 "    \"name\": \""+ operator +"\",\n" +
 "    \"permissions\": [\n" +
 "      {\n" +

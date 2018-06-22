@@ -5,7 +5,11 @@
  */
 package com.mycompany.biostartlocal;
 
+
+import com.mycompany.biostartlocal.common.internalframes.VerifyingFingerPrint;
+import com.mycompany.biostartlocal.common.internalframes.ScanFingerPrintClass;
 import com.mycompany.biostartlocal.common.Base64Decoder;
+import com.mycompany.biostartlocal.common.internalframes.EnrollFingerPrintClass;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.IOException;
@@ -358,7 +362,13 @@ public class addFingerPrint extends javax.swing.JFrame {
            errorMessage = errorMessage.concat("number of fingers is missing.\n");
            fingersNo.setText("");
            fingersNo.setBorder(new LineBorder(Color.red));
-        }else{
+        }else if(Integer.parseInt(fingersNo.getText())>10)
+        {
+           errorMessage = errorMessage.concat("Minimum number of finger is 1 and Maximum is 10.\n");
+           fingersNo.setText("");
+           fingersNo.setBorder(new LineBorder(Color.red));
+        }
+        else{
         numCorrectFields++;
         fingers = Integer.parseInt(fingersNo.getText());
         
@@ -368,7 +378,7 @@ public class addFingerPrint extends javax.swing.JFrame {
                    JOptionPane.ERROR_MESSAGE );
         }else
         {
-            ScanFingerPrint scan = new ScanFingerPrint();
+            ScanFingerPrintClass scan = new ScanFingerPrintClass();
         try {
             
             
@@ -379,11 +389,11 @@ public class addFingerPrint extends javax.swing.JFrame {
             JSONArray array = new JSONArray();
             JSONObject item = new JSONObject();
             int a=1;
-            JOptionPane.showMessageDialog(null,"Click Ok to scan the "+a+" finger.");
+            
             for(int idx =0; idx < fingers; idx++)
         {
 //            Resulsts = scan.scan(device);
-              
+            JOptionPane.showMessageDialog(null,"Click Ok to scan the "+a+" finger."); 
             temp1.setIcon(null);
             temp0.setIcon(null);
             Resulsts = scan.scan(device);
@@ -438,6 +448,14 @@ public class addFingerPrint extends javax.swing.JFrame {
                     template0 = (String) jObject.get("template0");
                     JSONObject jObj = new JSONObject(Resulsts2);
                     template1 = (String) jObj.get("template0");
+                    
+                    VerifyingFingerPrint verfy = new VerifyingFingerPrint();
+                    String Results3 = verfy.verify(device, template0, template1);
+                    
+//                    if(Results3!="")
+//                    {
+//                        
+//                    }
                     Base64Decoder myimage = new Base64Decoder();
                     myimage.decode((String) jObject.get("template_image0"));
                     myimage.decode2((String) jObj.get("template_image0"));
@@ -471,12 +489,12 @@ public class addFingerPrint extends javax.swing.JFrame {
                
                json.put("fingerprint_template_list",array);
             message = json.toString();
-            if(idx<fingers)
-            {
-                JOptionPane.showMessageDialog(null,"Click Ok to scan the "+a+" finger.");
-                a++;
-            }
-            System.out.println("message : " + message);
+//            if(idx<fingers)
+//            {
+//                JOptionPane.showMessageDialog(null,"Click Ok to scan the "+a+" finger.");
+//                a++;
+//            }
+//            System.out.println("message : " + message);
         }   
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(addFingerPrint.class.getName()).log(Level.SEVERE, null, ex);
@@ -494,7 +512,7 @@ public class addFingerPrint extends javax.swing.JFrame {
   
          if(Resulsts2!=null && Resulsts!=null)
         {
-            EnrollFingerPrint addtemp = new EnrollFingerPrint();
+            EnrollFingerPrintClass addtemp = new EnrollFingerPrintClass();
             try {
                 addtemp.enrollfingerprint(user_id, message);
             } catch (IOException | URISyntaxException ex) {

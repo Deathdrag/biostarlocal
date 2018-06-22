@@ -91,14 +91,37 @@ public class userlist {
     {
         JSONObject jsonObject = new JSONObject(t);
         JSONArray tsmresponse = (JSONArray) jsonObject.get("records");
+       
+        
         ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> Group = new ArrayList<>();
+        ArrayList<String> AllUsers = new ArrayList<>();
+        String access = null;
+        String ArryList = null;
 
-    for(int i=0; i<tsmresponse.length(); i++){
-        list.add("\""+tsmresponse.getJSONObject(i).getString("user_id")+"\"");
-    }
     
 
-//    System.out.println(list);
+        
+        for(int i=0; i<tsmresponse.length(); i++){
+            int j;
+            for( j=0; j<tsmresponse.getJSONObject(i).getJSONArray("access_groups").length();j++)
+        {
+            Group.add("{"+tsmresponse.getJSONObject(i).getJSONArray("access_groups").getJSONObject(j).getString("name")+"}");
+        }
+            
+        ArryList =("{"+tsmresponse.getJSONObject(i).getString("user_id")+
+                ", "+tsmresponse.getJSONObject(i).getString("status")+
+                ", "+tsmresponse.getJSONObject(i).getString("name")+
+                ", "+tsmresponse.getJSONObject(i).getString("email")+
+                ", "+Group+""+
+                ", "+tsmresponse.getJSONObject(i).getJSONObject("user_group").getString("name")+"}");
+        list.add(ArryList);
+         
+        }
+     
+    
+
+    System.out.println(list);
         valu = list.toArray(new String[0]);
      
        return valu;

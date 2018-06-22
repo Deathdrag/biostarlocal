@@ -49,54 +49,27 @@ public class LoginAction {
 //                System.out.println(output+"/n");
                 }
                 String cookieValue = null;
-                Map<String, List<String>> headers = conn.getHeaderFields();
-              
-//                headers.forEach((key,value)-> {
-//                if (key.startsWith("Set-Cookie")) {
-//                value.forEach(v->System.out.println(v));
-//                    }
-//                });
-               for (Map.Entry<String, List<String>> entry : headers.entrySet())
-               {
-//                   System.out.println("Key : " + entry.getKey() + 
-//                       " ,Value : " + entry.getValue());
-//                  
-                
-               }
+//                Map<String, List<String>> headers = conn.getHeaderFields();
+//              
+////                headers.forEach((key,value)-> {
+////                if (key.startsWith("Set-Cookie")) {
+////                value.forEach(v->System.out.println(v));
+////                    }
+////                });
+//               for (Map.Entry<String, List<String>> entry : headers.entrySet())
+//               {
+////                   System.out.println("Key : " + entry.getKey() + 
+////                       " ,Value : " + entry.getValue());
+////                  
+//                
+//               }
                cookieValue = conn.getHeaderField("set-cookie");
-//               System.out.println(cookieValue);
+               System.out.println(cookieValue);
                String[] strCookieArr = cookieValue.split("bs-cloud-session-id=",0);
                String[] strCookieArr2 = strCookieArr[1].split(";", 0);
                String  sessionID =strCookieArr2[0];
-//               System.out.println("Hey paul");
-//               System.out.println(sessionID);
                
-//                List<String> cookies = conn.getHeaderFields().get("Set-Cookie");
-//      
-//                for (String cookie : cookies) {
-//                   System.out.println("Set-Cookies" + cookie);
-//                conn.addRequestProperty("Cookie", cookie.split(";", 2)[0]);
-//                
-//                }
-//                boolean isSessionIdContained = conn.getHeaderField("Set-Cookie").equals("Set-Cookie");
-//                  if(isSessionIdContained == true)
-//                  {
-//                      System.out.println("Hey paul");
-//                      cookieValue = conn.getHeaderField("set-cookie");
-//                      System.out.println(cookieValue);
-//                   }
-//                
-//                String cookieValue = null; 
-//                for (Iterator iter = values.iterator(); iter.hasNext(); ) {
-//                    String v = (String)iter.next();
-//                    if (cookieValue == null)
-//                        cookieValue = v;r
-//                    else
-//                        cookieValue = cookieValue + ";" + v;
-//                       System.out.println(cookieValue);
-//                }
-//                    os.close();
-                
+               
                return sessionID;
                
 

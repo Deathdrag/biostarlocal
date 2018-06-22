@@ -37,8 +37,11 @@
           <Group type="102" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="jPanel2" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -61,7 +64,7 @@
                   <EmptySpace min="-2" pref="236" max="-2" attributes="0"/>
                   <Component id="UserName" min="-2" pref="150" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="UserRole" min="-2" pref="150" max="-2" attributes="0"/>
+                  <Component id="UserSession" min="-2" pref="150" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jButton1" min="-2" pref="73" max="-2" attributes="0"/>
               </Group>
@@ -75,7 +78,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="UserName" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="UserRole" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="UserSession" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="15" max="32767" attributes="0"/>
@@ -108,18 +111,16 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Paull"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="UserRole">
+        <Component class="javax.swing.JLabel" name="UserSession">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Paull"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
@@ -144,15 +145,20 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="userbutton" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="devicebutton" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="doorbutton" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="accescontrolbutton" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="monitoringbutton" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="timeattendancebutton" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="homebutton" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="doorbutton" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="accescontrolbutton" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="monitoringbutton" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="timeattendancebutton" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="homebutton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="userbutton" max="32767" attributes="0"/>
+                      <Component id="devicebutton" alignment="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -172,7 +178,7 @@
                   <Component id="monitoringbutton" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="timeattendancebutton" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -181,9 +187,9 @@
         <Component class="javax.swing.JButton" name="homebutton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="10" style="1"/>
+              <Font name="Times New Roman" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="home"/>
+            <Property name="text" type="java.lang.String" value="Home"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="homebuttonActionPerformed"/>
@@ -194,7 +200,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="1"/>
+            <Property name="text" type="java.lang.String" value="User"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userbuttonActionPerformed"/>
@@ -205,8 +211,11 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="2"/>
+            <Property name="text" type="java.lang.String" value="Device"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="devicebuttonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="doorbutton">
           <Properties>
@@ -215,6 +224,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doorbuttonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="accescontrolbutton">
           <Properties>
@@ -252,15 +264,18 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="descktopview" min="-2" pref="872" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="descktopview" min="-2" pref="732" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="descktopview" alignment="0" pref="370" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="descktopview" min="-2" pref="414" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
