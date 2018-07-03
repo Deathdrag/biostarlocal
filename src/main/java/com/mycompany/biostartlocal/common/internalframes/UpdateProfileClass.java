@@ -7,7 +7,6 @@ package com.mycompany.biostartlocal.common.internalframes;
 
 import com.google.gson.Gson;
 import com.mycompany.biostartlocal.LoginAction;
-import com.mycompany.biostartlocal.jsonTomap;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;

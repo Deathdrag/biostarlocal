@@ -7,7 +7,6 @@ package com.mycompany.biostartlocal.common.internalframes;
 
 import com.google.gson.Gson;
 import com.mycompany.biostartlocal.LoginAction;
-import com.mycompany.biostartlocal.jsonTomap;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -44,10 +43,8 @@ public class VerifyingFingerPrint {
 "}";
         
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-        URI uri = new URIBuilder("http://127.0.0.1:8795/v2/devices/"+devicId+"/scan_fingerprint")
+        URI uri = new URIBuilder("http://127.0.0.1:8795/v2/devices/"+devicId+"/verify_fingerprint")
                 
-//                .addParameter("id", devicId)
-//                .addParameter("Content-type", "application/json")
                 .build();
         HttpPost postNewUser = new HttpPost(uri);
         postNewUser.setEntity(new StringEntity(json, "UTF8"));
@@ -77,7 +74,7 @@ public class VerifyingFingerPrint {
         else if(statusCode != 200)
         {
             jsonTomap msg = new jsonTomap();
-            results = msg.jsonToMap(content);
+            msg.jsonToMap(content);
         }
         
         } catch (IOException e) {

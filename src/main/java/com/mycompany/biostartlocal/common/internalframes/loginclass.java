@@ -78,8 +78,6 @@ public String LoginAction(String userid,String password) throws MalformedURLExce
                         
                         if(statusCode== 200)
                         {
-                            
-//                            Results = content;
                             Header[] cookies = response.getHeaders("set-cookie");
                             if (cookies == null) {
                                     System.out.println("None");

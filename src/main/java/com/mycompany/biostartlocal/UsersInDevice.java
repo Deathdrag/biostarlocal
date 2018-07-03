@@ -5,6 +5,7 @@
  */
 package com.mycompany.biostartlocal;
 
+import com.mycompany.biostartlocal.common.internalframes.userlist;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -73,9 +74,9 @@ public class UsersInDevice {
         System.out.println("content = " + content);
         if(statusCode== 200)
         {
-            userlist uslist = new userlist();
-            uslist.jsonToMap(content);
-            myuserlist=uslist.jsonToMap(content);
+//            userlist uslist = new userlist();
+//            uslist.jsonToMap(content);
+//            myuserlist=uslist.jsonToMap(content);
             System.out.println("My list"+Arrays.toString(myuserlist));
 
         }

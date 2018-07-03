@@ -5,6 +5,8 @@
  */
 package com.mycompany.biostartlocal;
 
+import com.mycompany.biostartlocal.common.internalframes.jsonTomap;
+import com.mycompany.biostartlocal.common.internalframes.userlist;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -86,8 +88,8 @@ public class AddUserDevice {
         AddUserDevice lg = new AddUserDevice();
         String snID = lg.LoginAction();
         userlist lst = new userlist();
-        lst.users();
-        String[] idList = lst.users();
+//        lst.users();
+        String[] idList = null;
         System.out.println("my idlist"+Arrays.toString(idList));
         String content= null;
         Gson gson = new Gson();

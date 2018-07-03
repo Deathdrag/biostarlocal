@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.biostartlocal;
+package com.mycompany.biostartlocal.common.internalframes;
 
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -31,14 +32,13 @@ import org.json.JSONObject;
  */
 public class userlist {
     public int a = 1;
-    public String[] myuserlist = null;
+    public String myuserlist = null;
     public String[] valu = null;
     public String addvalues ;
     JSONArray array = new JSONArray();
-    public String[] users() throws IOException, URISyntaxException
+    public String users(String snID) throws IOException, URISyntaxException
     {
-        LoginAction lgin = new LoginAction();
-        String snID = lgin.LoginAction();
+        
         String content= null;
         Gson gson = new Gson();
 //        String json = "{\n" +
@@ -68,14 +68,10 @@ public class userlist {
         content = EntityUtils.toString(httpResponse.getEntity());
  
         int statusCode = httpResponse.getStatusLine().getStatusCode();
-//        System.out.println("statusCode = " + statusCode);
-//        System.out.println("content = " + content);
         if(statusCode== 200)
         {
-            userlist uslist = new userlist();
-            uslist.jsonToMap(content);
-           myuserlist=uslist.jsonToMap(content);
-//           System.out.println("My list"+Arrays.toString(myuserlist));
+            
+           myuserlist=content;
 
         }
  
@@ -87,50 +83,5 @@ public class userlist {
         return myuserlist;
         
     }
-    public String[] jsonToMap(String t) throws JSONException
-    {
-        JSONObject jsonObject = new JSONObject(t);
-        JSONArray tsmresponse = (JSONArray) jsonObject.get("records");
-       
-        
-        ArrayList<String> list = new ArrayList<>();
-        ArrayList<String> Group = new ArrayList<>();
-        ArrayList<String> AllUsers = new ArrayList<>();
-        String access = null;
-        String ArryList = null;
-
-    
-
-        
-        for(int i=0; i<tsmresponse.length(); i++){
-            int j;
-            for( j=0; j<tsmresponse.getJSONObject(i).getJSONArray("access_groups").length();j++)
-        {
-            Group.add("{"+tsmresponse.getJSONObject(i).getJSONArray("access_groups").getJSONObject(j).getString("name")+"}");
-        }
-            
-        ArryList =("{"+tsmresponse.getJSONObject(i).getString("user_id")+
-                ", "+tsmresponse.getJSONObject(i).getString("status")+
-                ", "+tsmresponse.getJSONObject(i).getString("name")+
-                ", "+tsmresponse.getJSONObject(i).getString("email")+
-                ", "+Group+""+
-                ", "+tsmresponse.getJSONObject(i).getJSONObject("user_group").getString("name")+"}");
-        list.add(ArryList);
-         
-        }
-     
-    
-
-    System.out.println(list);
-        valu = list.toArray(new String[0]);
-     
-       return valu;
-    }  
-    
-    public static void main(String args[]) throws MalformedURLException, IOException, URISyntaxException{
-    userlist lg = new userlist();
-    lg.users();
-    
-}
-
+   
 }

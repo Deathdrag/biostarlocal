@@ -23,8 +23,8 @@ public class LoginAction {
 "                                 \"mobile_os_version\": \"\",\n" +
 "                                  \"name\": \"admin\",\n" +
 "                                   \"notification_token\": \"string\",\n" +
-"                                    \"password\": \"admin747\",\n" +
-"                                     \"user_id\": \"admin\"\n" +
+"                                    \"password\": \"dragonboy747\",\n" +
+"                                     \"user_id\": \"dragonboy\"\n" +
 "}";
 
 		URL loginRequest = new URL("http://127.0.0.1:8795/v2/login");

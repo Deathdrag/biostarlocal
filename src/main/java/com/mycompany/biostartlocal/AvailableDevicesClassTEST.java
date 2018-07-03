@@ -3,14 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.biostartlocal.common.internalframes;
+package com.mycompany.biostartlocal;
 
 import com.google.gson.Gson;
-import com.mycompany.biostartlocal.LoginAction;
-import com.mycompany.biostartlocal.UsersInDevice;
-import com.mycompany.biostartlocal.userlist;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -33,7 +29,7 @@ import org.json.JSONObject;
  *
  * @author gk
  */
-public class AvailableDevicesClass {
+public class AvailableDevicesClassTEST {
     public int a = 1;
     public String[] myuserlist = null;
     public String[] valu = null;
@@ -41,22 +37,14 @@ public class AvailableDevicesClass {
     JSONArray array = new JSONArray();
     public String[] users(String snID) throws IOException, URISyntaxException
     {
-//        LoginAction lgn = new LoginAction();
-//        
-//         = lgn.LoginAction();
-        String content= null;
+        String content;
         Gson gson = new Gson();
-//        String json = "{\n" +
-//"  \"enroll_quality\": 80,\n" +
-//"  \"retrieve_raw_image\": true\n" +
-//"}";
         
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         URI uri = new URIBuilder("http://127.0.0.1:8795/v2/devices")
                 
                 .addParameter("limit", "0")
-                .addParameter("offset", "25")
-//                .addParameter("Content-type", "application/json")
+                .addParameter("offset", "0")
                 .build();
         HttpGet postNewUser = new HttpGet(uri);
         
@@ -77,7 +65,7 @@ public class AvailableDevicesClass {
         System.out.println("content = " + content);
         if(statusCode== 200)
         {
-            AvailableDevicesClass uslist = new AvailableDevicesClass();
+            AvailableDevicesClassTEST uslist = new AvailableDevicesClassTEST();
             uslist.jsonToMap(content);
             myuserlist=uslist.jsonToMap(content);
             System.out.println("My list"+Arrays.toString(myuserlist));
@@ -148,7 +136,7 @@ public class AvailableDevicesClass {
         System.out.println("content = " + content);
         if(statusCode== 200)
         {
-            AvailableDevicesClass uslist = new AvailableDevicesClass();
+            AvailableDevicesClassTEST uslist = new AvailableDevicesClassTEST();
             uslist.Search(content);
             myuserlist=uslist.jsonToMap(content);
             System.out.println("My list"+Arrays.toString(myuserlist));
@@ -189,11 +177,69 @@ public class AvailableDevicesClass {
        return valu;
     } 
     
-//    public static void main(String args[]) throws MalformedURLException, IOException, URISyntaxException{
-//    AvailableDevicesClass lg = new AvailableDevicesClass();
-//    lg.SearchDevice();
-////            lg.users();
-////    
-//}
+    public String[] deviceIDList(String snID) throws IOException, URISyntaxException
+    {
+        String content;
+        Gson gson = new Gson();
+        
+        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+        URI uri = new URIBuilder("http://127.0.0.1:8795/v2/devices")
+                
+                .addParameter("limit", "0")
+                .addParameter("offset", "25")
+                .build();
+        HttpGet postNewUser = new HttpGet(uri);
+        
+        CookieStore cookieStore = new BasicCookieStore();
+	BasicClientCookie cookie = new BasicClientCookie("bs-cloud-session-id",snID);
+	cookie.setDomain("127.0.0.1");
+	cookie.setPath("/");
+	cookieStore.addCookie(cookie);
+        
+        HttpClientContext context = HttpClientContext.create();
+        context.setCookieStore(cookieStore);
+
+	try (CloseableHttpResponse httpResponse = httpClient.execute(postNewUser,context)) {
+        content = EntityUtils.toString(httpResponse.getEntity());
+ 
+        int statusCode = httpResponse.getStatusLine().getStatusCode();
+        System.out.println("statusCode = " + statusCode);
+        System.out.println("content = " + content);
+        if(statusCode== 200)
+        {
+            AvailableDevicesClassTEST uslist = new AvailableDevicesClassTEST();
+            uslist.devicelist(content);
+            myuserlist=uslist.jsonToMap(content);
+            System.out.println("My list"+Arrays.toString(myuserlist));
+
+        }
+ 
+        } catch (IOException e) {
+            //handle exception
+        }
+        
+        
+        return myuserlist;
+        
+    }
+    
+//    json for getting the device ID list only
+    public String[] devicelist(String t) throws JSONException
+    {
+        JSONObject jsonObject = new JSONObject(t);
+        JSONArray tsmresponse = (JSONArray) jsonObject.get("records");
+        ArrayList<String> list = new ArrayList<>();
+
+    for(int i=0; i<tsmresponse.length(); i++){
+        list.add("\""+tsmresponse.getJSONObject(i).getInt("id")+"\"");
+      
+    }
+    
+
+        System.out.println(list);
+        valu = list.toArray(new String[0]);
+     
+       return valu;
+    } 
 
 }

@@ -1,8 +1,9 @@
 
-package com.mycompany.biostartlocal;
+package com.mycompany.biostartlocal.common.internalframes;
 
 
 import com.mycompany.biostartlocal.common.internalframes.Device;
+import com.mycompany.biostartlocal.common.internalframes.Monitoring;
 import com.mycompany.biostartlocal.common.internalframes.User;
 import java.awt.Image;
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class DashBoard extends javax.swing.JFrame {
         homebutton = new javax.swing.JButton();
         userbutton = new javax.swing.JButton();
         devicebutton = new javax.swing.JButton();
-        doorbutton = new javax.swing.JButton();
+        MONTbutton = new javax.swing.JButton();
         accescontrolbutton = new javax.swing.JButton();
         monitoringbutton = new javax.swing.JButton();
         timeattendancebutton = new javax.swing.JButton();
@@ -128,11 +129,11 @@ public class DashBoard extends javax.swing.JFrame {
             }
         });
 
-        doorbutton.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        doorbutton.setText("3");
-        doorbutton.addActionListener(new java.awt.event.ActionListener() {
+        MONTbutton.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        MONTbutton.setText("MONT");
+        MONTbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doorbuttonActionPerformed(evt);
+                MONTbuttonActionPerformed(evt);
             }
         });
 
@@ -149,19 +150,16 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(userbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(devicebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(homebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(doorbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(accescontrolbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(monitoringbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(timeattendancebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(homebutton))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(userbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(devicebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+                    .addComponent(accescontrolbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(monitoringbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timeattendancebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MONTbutton))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +170,7 @@ public class DashBoard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(devicebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(doorbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MONTbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(accescontrolbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -189,13 +187,13 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(descktopview, javax.swing.GroupLayout.PREFERRED_SIZE, 872, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(descktopview, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(descktopview, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(descktopview, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -217,7 +215,7 @@ public class DashBoard extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 1, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -247,18 +245,27 @@ public class DashBoard extends javax.swing.JFrame {
         String session = UserSession.getText();
         try {
             
-            Device dvc = new Device();
+            Device dvc = new Device(session);
             dvc.setVisible(true);
             descktopview.add(dvc);
-        } catch (IOException | URISyntaxException ex) {
+        } catch (IOException | URISyntaxException | ParseException ex) {
             Logger.getLogger(DashBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_devicebuttonActionPerformed
 
-    private void doorbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doorbuttonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_doorbuttonActionPerformed
+    private void MONTbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MONTbuttonActionPerformed
+        Monitoring mont;
+        String session = UserSession.getText();
+        try {
+            
+            mont = new Monitoring(session);
+            mont.setVisible(true);
+            descktopview.add(mont);
+        } catch (IOException | URISyntaxException | ParseException ex) {
+            Logger.getLogger(DashBoard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_MONTbuttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,12 +303,12 @@ public class DashBoard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton MONTbutton;
     private javax.swing.JLabel UserName;
     private javax.swing.JLabel UserSession;
     private javax.swing.JButton accescontrolbutton;
     private javax.swing.JDesktopPane descktopview;
     private javax.swing.JButton devicebutton;
-    private javax.swing.JButton doorbutton;
     private javax.swing.JButton homebutton;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

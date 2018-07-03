@@ -449,8 +449,8 @@ public class addFingerPrint extends javax.swing.JFrame {
                     JSONObject jObj = new JSONObject(Resulsts2);
                     template1 = (String) jObj.get("template0");
                     
-                    VerifyingFingerPrint verfy = new VerifyingFingerPrint();
-                    String Results3 = verfy.verify(device, template0, template1);
+//                    VerifyingFingerPrint verfy = new VerifyingFingerPrint();
+//                    String Results3 = verfy.verify(device, template0, template1);
                     
 //                    if(Results3!="")
 //                    {

@@ -6,24 +6,16 @@
 package com.mycompany.biostartlocal.common.internalframes;
 
 import com.mycompany.biostartlocal.addFingerPrint;
-import com.mycompany.biostartlocal.addFingerPrint;
-import com.mycompany.biostartlocal.adduser;
-import com.mycompany.biostartlocal.adduser;
-import static com.oracle.jrockit.jfr.ContentType.None;
 import java.awt.Color;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -660,7 +652,7 @@ public class compliteprofile extends javax.swing.JFrame {
                    JOptionPane.ERROR_MESSAGE );
         }else
         {
-          adduser addto = new adduser();
+          AddUserClass addto = new AddUserClass();
             try {
                 addto.adduser(Email, Name, LoginID, EndDate, Password, StartDate, nationalID, Telephone, OperatorLevel,no);
             } catch (IOException | URISyntaxException ex) {

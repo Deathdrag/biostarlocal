@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.biostartlocal;
+package com.mycompany.biostartlocal.common.internalframes;
 
 import com.google.gson.Gson;
+import com.mycompany.biostartlocal.LoginAction;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -28,7 +29,7 @@ import org.apache.http.util.EntityUtils;
 //import okhttp3.RequestBody;
 //import okhttp3.Response;
 
-public class adduser extends LoginAction {
+public class AddUserClass extends LoginAction {
     
     
   public String adduser(String mail, String namee, String loginid,String expdate, String pswrd, 

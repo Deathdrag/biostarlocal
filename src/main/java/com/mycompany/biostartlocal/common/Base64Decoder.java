@@ -10,10 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import org.apache.commons.codec.binary.Base64;
 
-/**
- *
- * @author gk
- */
 public class Base64Decoder {
     public FileOutputStream image=null;
     public FileOutputStream image2=null;

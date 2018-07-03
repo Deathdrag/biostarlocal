@@ -5,7 +5,7 @@
  */
 package com.mycompany.biostartlocal.common;
 
-import com.mycompany.biostartlocal.userlist;
+import com.mycompany.biostartlocal.common.internalframes.userlist;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
